@@ -1,7 +1,7 @@
 body {
-  background-color:azure;
-  background-image: url("GACHA.png");
-  background-size: 500px 500px;
+  background-color: azure;
+  background-image: url("img/GACHA.png");
+  background-size: 25%;   /* 比率維持で表示 */
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -9,20 +9,20 @@ body {
 h1 {
   text-align: center;
   font-size: 48px;
-
 }
 
-.btn-row{
-  display: flex;               /* 横並びにする */
-  justify-content: center;     /* 横方向の中央揃え */
-  align-items: center;         /* 高さ方向の中央揃え（必要なら） */
-  gap: 12px;                   /* ボタン間の間隔 */
-  padding: 0px;               /* 親の余白（任意） */
+.btn-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  flex-wrap: wrap;               /* ← スマホで折り返し可能に */
 }
 
-.btn{
+.btn {
   padding: 24px 48px;
-  font-size: 48px;
+  font-size: 32px;               /* ← スマホ対応で少し下げる */
   border: 1px solid #ccc;
   border-radius: 6px;
   background: #f5f5f5;
@@ -31,19 +31,35 @@ h1 {
 
 .slot-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 横5列 */
-  grid-template-rows: repeat(2, auto);   /* 縦2行 */
+  grid-template-columns: repeat(5, 1fr);  
   gap: 10px;
-  width: 600px;
+  width: 100%;                   /* ← スマホ対応 */
+  max-width: 600px;              /* PCでは最大600px */
   margin: 0 auto;
 }
 
 .slot-grid img {
-  width: 100px;
-  height: 100px;
+  width: 100%;                   /* ← グリッド幅に合わせる */
+  max-width: 100px;              /* PCでは100pxまで */
+  aspect-ratio: 1 / 1;           /* 正方形維持 */
   object-fit: cover;
   border-radius: 6px;
-  border: none;
-  opacity: 0;                 /* 最初は透明 */
-  transition: opacity 0.3s;   /* フェードイン */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* ▼ スマホ用（画面幅480px以下） */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 32px;
+  }
+
+  .btn {
+    font-size: 24px;
+    padding: 16px 24px;
+  }
+
+  .slot-grid {
+    grid-template-columns: repeat(3, 1fr); /* スマホでは3列に */
+  }
 }
